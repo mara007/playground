@@ -15,12 +15,7 @@ public:
     template <class T>
     MyCout & operator<< (const T & x)
     {
-    //    if (m_lock.try_lock ())
-        {
-            std::cout << x;
-    //        m_lock.unlock ();
-        }
-
+        std::cout << x;
         return *this;
     }
 
