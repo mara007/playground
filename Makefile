@@ -2,9 +2,12 @@
 CC = g++
 CFLAGS = -g -std=c++11
 
-all: tester
+all: threads
 
-tester: tester.cpp
-	$(CC) $(CFLAGS) -o tester tester.cpp
+clean:
+	rm -Rf *o *exe
+
+threads: threads.cpp
+	$(CC) $(CFLAGS) -o threads threads.cpp
 
 
