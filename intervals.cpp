@@ -260,15 +260,14 @@ class Assembler
         IntervalSet::iterator low, hi, i, tmp;
         i = m_set.insert (in);
 
-        if (m_set.size () <= 2)
+        if (m_set.size () == 1)
             return;
 
         if (m_set.begin () != i)
             --i;
         std::cout << "11\n";
         hi = m_set.upper_bound (Interval (in.hi + 1));
-
-        std::cout << "22\n";
+        low = m_set.lower_bound (Interval (in.low -1));
         /*
         IntervalSet::iterator low = m_set.lower_bound (in),
                               hi  = m_set.upper_bound (Interval (in.hi + 1)),
@@ -288,10 +287,21 @@ class Assembler
         //if (m_set.end () != hi)
         //    ++hi;
 
-        Interval new_range (*i);
-        while (++i != hi)
+        Interval new_range (*low);
+        std::cout << "new range : " << new_range << std::endl;
+        std::cout << "22\n";
+        //while (++i != hi)
+        while (low != hi)
         {
+            i = low;
             bool erase {false};
+
+        std::cout << "33\n";
+            if (++i == m_set.end())
+            {
+                std::cout << "end\n";
+                break;
+            }
 
             std::cout << "checking : " << new_range << " and " << *i << std::endl;
             if (Interval::is_join (Interval::compare (new_range, *i)))
@@ -310,6 +320,7 @@ class Assembler
             {
                 ++i;
             }
+            low = i;
 
             if (++xx == 10)
                 break;
