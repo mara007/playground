@@ -1,0 +1,63 @@
+= object_manager
+:toc:
+
+== 1. Entity-component system
+* defined in `entity.h` header
+* time spent: ~ 1h
+
+=== `entity_t`
+* a top-level item in the hiearchy
+* serves as a root for `component_t` objects tree
+* allows instantiation of new `component_t`
+* owns `object_manager_t`.
+* uses _smart_ pointers
+* container of entities - just a vector
+
+=== `component_t`
+* and arbitrary component in tree hiearchy of components of an `entity_t`
+* can instantiate `object_t` classes of a requested type using `object_manager_t`
+* can instantiate new child components
+* no component tree traversal requested/implemented
+** it wasn't clear what to do with a component hiearchy. Even though I can imagine entity as a complex system, like a parts of a vehicle or an areas of a map, it's possiblities are not explored here.
+* uses _smart_ pointers
+
+== 2. Object manager & stuff
+* defined in `object_manager.h`
+* time spent: ~2h
+* uses object factory to instantiate a desired child instances of `object_t` class
+* allows a `visitor` to customize interaction with stored object instances
+** advantages: allows to call a non-virtual methods of `object_t` child classes without need of dynamic_casting / storing a type of particular `object_t` child class
+** flaws: a 'generic' object manager is not so generic. `object_visitor_t` is dependant on all classes inherited from `object_t`. Even though only through a forward declaration
+* it's a bit spagety code. `object_manager_t` and `object_t` depends on each ohter. `object_t` needs manager to deregister itself from it when being destroyed. This dependecy could be cut by using a deleter functor with wrapped manager
+
+=== object_manager_t
+* stores instances of `object_t`
+* uses `abstract_object_factory_t` implementation to instantiate a correct child instances of `object_t`
+* allows _visitor_ to access all stored objects
+* allows to call a custom function on all stored objects
+* is thread-safe (I might miss something)
+
+=== object_t
+* uses generic 'tags' to store various properties, like 'visible'
+* unregisters itself from manager when deleted
+
+== 3. EntityAction
+* implementation in `entity_actions_implementation.h` and `entity_actions_implementation.cpp`
+* time spent: ~2h
+* two "sets" of a custom implementations:
+** actions1 / actions_one
+*** factory to create childs of `object_t` by `actions1_e` enum
+*** demonstrates visitor which can access nonvirtual methods of `object_t` derivates (so base class is not poluted with everything)
+*** demonstrates visitor which collects "visible" objects
+** actions2 / actions_two
+*** factory to create childs of `object_t` by `actions2_e` enum
+*** no visitors, visible objects will be collected by `object_manager_t::for_each()`
+
+== 4. Presentation
+* implementation in `main.cpp`
+* time spent: ~1h
+* vector of two `entity_t` instances, each created with an `object_manager_t` using a different object factory
+* entities populated with component hiearchy, components created objects
+
+== 5. Report
+* time spent: >1h

@@ -1,6 +1,6 @@
 
 CC = g++
-CFLAGS = -g -std=c++11
+CFLAGS = -g
 
 all: tester
 
