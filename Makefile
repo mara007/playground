@@ -10,7 +10,7 @@ tester: tester.cpp
 tester_utf: tester_utf.cpp
 	$(CC) $(CFLAGS) -o tester_utf tester_utf.cpp
 
-tester_pool: tester_pool.cpp arbitrary_pool.h
+tester_pool: tester_pool.cpp my_pool.h
 	$(CC) $(CFLAGS) -o tester_pool tester_pool.cpp
 
 
