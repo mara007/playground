@@ -4,9 +4,10 @@
 echo 'setup neovim + c++'
 #
 #
+echo install neovim from ppa + clang
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
-sudo apt install clang nvim
+sudo apt install clang neovim
 
 echo CLONE nvChad
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
@@ -14,8 +15,12 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 echo VIM config to nVim
 echo 'vim.cmd("source ~/.vimrc")' >> ~/.config/nvim/init.lua
 
+echo starting neovim, answer \'N\'o..
+read -p '<hit enter to start neovim>'
+nvim
+
 echo PLUGINS to chadrc
-cat > ~/config/nvim/lua/cusom/chadrc.lua << CHADRC
+cat > ~/.config/nvim/lua/custom/chadrc.lua << CHADRC
 ---@type ChadrcConfig
 local M = {}
 
@@ -67,5 +72,10 @@ lspconfig.clangd.setup {
 }
 
 LSPCONFIG
+
+echo starting neovim, type :MasonInstallAll
+echo starting neovim, type :TSInstall cpp
+read -p '<hit enter to start neovim>'
+nvim
 
 
