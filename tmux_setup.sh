@@ -27,6 +27,15 @@ set -g @plugin 'catppuccin/tmux'
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
 
+set -g @catppuccin_window_status_enable "yes"
+set -g @catppuccin_window_status_icon_enable "yes"
+
+# uncomment these to get rid of windows get renamed to a current directory
+# set -g @catppuccin_window_default_text "#W"
+# set -g @catppuccin_window_current_text "#W"
+# set -g @catppuccin_window_current_format_directory_text "#W"
+# set -g @catppuccin_window_format_directory_text "#W"
+
 CONF
 
 if [ -e ~/.tmux.conf ] ; then
