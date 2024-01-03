@@ -4,10 +4,10 @@
 echo 'setup neovim + c++'
 #
 #
-echo install neovim from ppa + clang
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
-sudo apt install clang neovim
+#echo install neovim from ppa + clang
+#sudo add-apt-repository ppa:neovim-ppa/unstable
+#sudo apt update
+#sudo apt install clang neovim
 
 echo CLONE nvChad
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
@@ -26,29 +26,91 @@ local M = {}
 
 M.ui = { theme = 'catppuccin' }
 M.plugins = "custom.plugins"
+M.mappings = require("custom.mappings")
 
 return M
 CHADRC
+
+
+echo mappings for debug
+cat > ~/.config/nvim/lua/custom/mappings.lua << MAPPINGS
+local M = {}
+
+M.dap = {
+    plugin = true,
+    n = {
+        ["<leader>db"] = {
+            "<cmd> DapToggleBreakpoint <CR>",
+            "Add breakpoint at line",
+        },
+        ["<leader>dr"] = {
+            "<cmd> DapContinue <CR>",
+            "Start or continue the debugger",
+        }
+    }
+}
+
+return M
+MAPPINGS
+
 
 echo PLUGINS config
 mkdir ~/.config/nvim/lua/custom/
 cat > ~/.config/nvim/lua/custom/plugins.lua << PLUGINS
 local plugins = {
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
-    end,
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "clangd"
-      }
+    {
+        "rcarriga/nvim-dap-ui",
+        event = "VeryLazy",
+        dependencies = "mfussenegger/nvim-dap",
+        config = function()
+            local dap = require("dap")
+            local dapui = require("dapui")
+            dapui.setup()
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close()
+            end
+        end
+    },
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        event = "VeryLazy",
+        dependecies = {
+            "williamboman/mason.nvim",
+            "mfussenegger/nvim-dap",
+        },
+        opts = {
+            handlers = {},
+        },
+    },
+    {
+        "mfussenegger/nvim-dap",
+        config = function(_, _)
+            require("core.utils").load_mappings("dap")
+        end
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            require "plugins.configs.lspconfig"
+            require "custom.configs.lspconfig"
+        end,
+    },
+    {
+        "williamboman/mason.nvim",
+        opts = {
+            ensure_installed = {
+                "clangd",
+                -- "clang-format",
+                "codelldb",
+            }
+        }
     }
-  }
 }
 
 return plugins
