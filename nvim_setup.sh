@@ -5,15 +5,15 @@ echo 'setup neovim + c++'
 #
 # ubuntu ppa (prefered)
 echo install neovim from ppa + clang
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
-sudo apt install clang neovim
+#sudo add-apt-repository ppa:neovim-ppa/unstable
+#sudo apt update
+#sudo apt install clang neovim
 # or get deb for old debian
 # wget https://github.com/neovim/neovim-releases/releases/download/nightly/nvim-linux64.deb
 
 echo get nerd fonts:
 echo e.g. https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip
-echo and put it to ~/.local/share/fonts/ (or system /usr/share/fonts/)
+echo 'and put it to ~/.local/share/fonts/ (or system /usr/share/fonts/)'
 echo and setup your terminal to use it
 read -p '<hit enter to continue>'
 
@@ -144,8 +144,8 @@ lspconfig.clangd.setup {
 LSPCONFIG
 
 echo starting neovim, type :MasonInstallAll
-echo starting neovim, type :TSInstall cpp
-echo ..use :TSInstall for [bash c lua make python ..etc ]
+echo starting neovim, type :TSInstall cpp bash c make python vimdoc ini json
+echo ..use :TSInstall for [ ..etc ]
 read -p '<hit enter to start neovim>'
 nvim
 
