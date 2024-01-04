@@ -3,11 +3,19 @@
 
 echo 'setup neovim + c++'
 #
-#
-#echo install neovim from ppa + clang
-#sudo add-apt-repository ppa:neovim-ppa/unstable
-#sudo apt update
-#sudo apt install clang neovim
+# ubuntu ppa (prefered)
+echo install neovim from ppa + clang
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
+sudo apt install clang neovim
+# or get deb for old debian
+# wget https://github.com/neovim/neovim-releases/releases/download/nightly/nvim-linux64.deb
+
+echo get nerd fonts:
+echo e.g. https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip
+echo and put it to ~/.local/share/fonts/ (or system /usr/share/fonts/)
+echo and setup your terminal to use it
+read -p '<hit enter to continue>'
 
 echo CLONE nvChad
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
@@ -32,7 +40,7 @@ return M
 CHADRC
 
 
-echo mappings for debug
+echo MAPPINGS for debug
 cat > ~/.config/nvim/lua/custom/mappings.lua << MAPPINGS
 local M = {}
 
@@ -137,6 +145,7 @@ LSPCONFIG
 
 echo starting neovim, type :MasonInstallAll
 echo starting neovim, type :TSInstall cpp
+echo ..use :TSInstall for [bash c lua make python ..etc ]
 read -p '<hit enter to start neovim>'
 nvim
 
