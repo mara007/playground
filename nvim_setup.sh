@@ -32,7 +32,21 @@ cat > ~/.config/nvim/lua/custom/chadrc.lua << CHADRC
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = { theme = 'catppuccin' }
+M.ui = {
+    theme = 'catppuccin',
+    tabufline = {
+        show_numbers = true
+    },
+    hl_override = {
+        Normal = {
+            bg = "NONE"
+        },
+        -- NormalFloat = {
+        --     bg = "NONE"
+        -- }
+    }
+}
+
 M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
 
@@ -54,7 +68,9 @@ M.dap = {
         ["<leader>dr"] = {
             "<cmd> DapContinue <CR>",
             "Start or continue the debugger",
-        }
+        },
+        -- moje
+        ["<C-p>"] = { "<cmd> Telescope find_files <CR>", "Find files", },
     }
 }
 
@@ -145,7 +161,6 @@ LSPCONFIG
 
 echo starting neovim, type :MasonInstallAll
 echo starting neovim, type :TSInstall cpp bash c make python vimdoc ini json
-echo ..use :TSInstall for [ ..etc ]
 read -p '<hit enter to start neovim>'
 nvim
 
