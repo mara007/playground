@@ -203,6 +203,7 @@ local nvim_tree_conf = require("plugins.configs.nvimtree")
 nvim_tree_conf.renderer.highlight_opened_files = "all"
 nvim_tree_conf.renderer.root_folder_label = true
 nvim_tree_conf.git.enable = true
+nvim_tree_conf.renderer.icons.show.git = true
 
 NVIMTREE
 
