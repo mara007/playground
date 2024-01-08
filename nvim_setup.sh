@@ -5,10 +5,10 @@ echo 'setup neovim + c++'
 #
 # ubuntu ppa (prefered)
 echo install neovim from ppa
-#sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo add-apt-repository ppa:neovim-ppa/unstable
 #optional - old debian: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 55F96FCF8231B6DD
-#sudo apt update
-#sudo apt install neovim
+sudo apt update
+sudo apt install neovim
 # or get deb for old debian
 # wget https://github.com/neovim/neovim-releases/releases/download/nightly/nvim-linux64.deb
 
