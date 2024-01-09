@@ -1,9 +1,29 @@
 #!/usr/bin/env bash
 #
+# this scripts install nvChad neovim + c/c++/python language servers (clangd/pyright) + c++ debugger support
+#
+
+INSTALL=1
+case "$1" in
+    reset)
+    echo Deleting old neovim config..
+    rm -Rf ~/.config/nvim/ ~/.local/share/nvim/
+    exit
+        ;;
+    noinstall|skip_install)
+        INSTALL=0
+        ;;
+    -h|--help)
+        echo "usage: $0 [ reset | noinstall ]"
+        exit
+        ;;
+esac
+
 
 echo 'setup neovim + c++'
 #
 # ubuntu ppa (prefered)
+if [ $INSTALL = 1 ] ; then
 echo install neovim from ppa
 sudo add-apt-repository ppa:neovim-ppa/unstable
 #optional - old debian: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 55F96FCF8231B6DD
@@ -15,6 +35,7 @@ sudo apt install neovim
 echo
 echo 'install dependecies (clang, ..)'
 sudo apt install clang npm python3-venv ripgrep
+fi
 
 echo
 echo '!!! get nerd fonts !!!'

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include <locale>
 #include <thread>
+#include <vector>
 #include "my_pool.h"
 
 using namespace std::chrono_literals;
@@ -20,16 +20,17 @@ struct test_t {
 
     void use_me(int x) {
         std::cout << "test_t(" << i_ << ") used from thread: " << x << std::endl;
-        std::this_thread::sleep_for(i_ * 1ms);
+        // std::this_thread::sleep_for(i_ * 1ns);
     }
 };
 
-#define THREAD_LOOPS 10
+#define THREAD_LOOPS 100000
 
 int main() {
     std::cout << "Hello, arbitrary world!\n";
 
-    auto p = my_pool_t<test_t>(3, 10);
+    auto p = my_pool_t<test_t>(2, 5);
+    my_pool_t<std::vector<std::string>> my_pool_vector(5, 5);
 
     size_t threads_num = 5;
     std::vector<std::thread> threads;

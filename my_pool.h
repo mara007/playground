@@ -3,6 +3,7 @@
 #include <list>
 #include <memory>
 #include <cassert>
+#include <iostream>
 #include <utility>
 #include <functional>
 #include <condition_variable>
