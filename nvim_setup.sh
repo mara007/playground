@@ -3,20 +3,31 @@
 # this scripts install nvChad neovim + c/c++/python language servers (clangd/pyright) + c++ debugger support
 #
 
+function help {
+   echo "usage: $0 [ reset | noinstall ]"
+   exit
+}
+
 INSTALL=1
 case "$1" in
+    "")
+        ;;
     reset)
-    echo Deleting old neovim config..
-    rm -Rf ~/.config/nvim/ ~/.local/share/nvim/
-    exit
-        ;;
-    noinstall|skip_install)
-        INSTALL=0
-        ;;
-    -h|--help)
-        echo "usage: $0 [ reset | noinstall ]"
+        echo Deleting old neovim config..
+        rm -Rf ~/.config/nvim/ ~/.local/share/nvim/
         exit
         ;;
+
+    noinstall|skip_install|noinstall)
+        INSTALL=0
+        ;;
+
+    -h|--help|help)
+        help
+        ;;
+    *)
+        help
+	    ;;
 esac
 
 
@@ -49,20 +60,27 @@ echo CLONE nvChad
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
 echo
-echo VIM config to nVim
-cat >> ~/.config/nvim/init.lua << VIMRC
-vim.cmd("source ~/.vimrc")
-vim.opt.whichwrap= nil
-vim.opt.swapfile = false
-vim.opt.list = true
--- overwriten somewhere vim.opt.listchars = "tab:▸\\ ,trail:·"
-
-VIMRC
-
-echo
 echo starting neovim, answer \'N\'o..
 read -p '<hit enter to start neovim>'
 nvim
+
+echo
+echo VIM create custom/init.lua - config to nVim
+mkdir ~/.config/nvim/lua/custom/
+cat > ~/.config/nvim/lua/custom/init.lua << INITLUA
+-- better vimtree
+require("custom.configs.nvimtree")
+
+vim.cmd("source ~/.vimrc")
+vim.opt.whichwrap = nil
+vim.opt.swapfile = false
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.list = true
+-- overwriten somewhere vim.opt.listchars = "tab:▸\\ ,trail:·"
+-- more 'classic vim-like' vim.opt.laststatus=2
+
+INITLUA
 
 echo
 echo PLUGINS to chadrc
@@ -86,9 +104,6 @@ M.ui = {
 
 M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
-
--- marek - better vimtree
-require("custom.configs.nvimtree")
 
 return M
 CHADRC
@@ -117,11 +132,10 @@ M.dap = {
 
 return M
 MAPPINGS
-		        	sdf
+
 
 echo
 echo PLUGINS config
-mkdir ~/.config/nvim/lua/custom/
 cat > ~/.config/nvim/lua/custom/plugins.lua << PLUGINS
 local plugins = {
     {
@@ -156,8 +170,10 @@ local plugins = {
     },
     {
         "mfussenegger/nvim-dap",
+
         config = function(_, _)
             require("core.utils").load_mappings("dap")
+            require("custom.configs.dap-custom").setup()
         end
     },
     {
@@ -227,6 +243,87 @@ nvim_tree_conf.git.enable = true
 nvim_tree_conf.renderer.icons.show.git = true
 
 NVIMTREE
+
+
+echo
+echo 'dap-custom config'
+cat > ~/.config/nvim/lua/custom/configs/dap-custom.lua << DAPCUSTOM
+local M = {}
+
+M.setup = function()
+    -- vim.highlight.create('DapBreakpoint', { ctermbg=0, guifg='#993939', guibg='#31353f' }, false)
+    -- vim.highlight.create('DapLogPoint', { ctermbg=0, guifg='#61afef', guibg='#31353f' }, false)
+    -- vim.highlight.create('DapStopped', { ctermbg=0, guifg='#98c379', guibg='#31353f' }, false)
+
+    vim.fn.sign_define('DapBreakpoint', { text='❤️', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+    vim.fn.sign_define('DapBreakpointCondition', { text='ﳁ', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+    vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
+    vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
+    vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+
+    local dap = require('dap')
+    local dap_utils = require('dap.utils')
+
+    dap.configurations.cpp = {
+        {
+            name = 'attach: INSTANT lldb',
+            type = 'codelldb',
+            request = 'attach',
+            program = '/www/mapy/instant/bin/instant',
+            pid = function()
+                local pgrep_cmd = {'pgrep', '^/www/mapy/instant/bin/instant', '-fn'}
+                local output = vim.fn.system(pgrep_cmd)
+                if output == '\n' then
+                    dap_utils.notifiy('no INSTANT running!', vim.log.levels.INFO)
+                    return
+                end
+                return tonumber(output)
+            end,
+            args = {},
+        },
+        {
+            name = 'attach: HLODAC lldb',
+            type = 'codelldb',
+            request = 'attach',
+            program = '/www/firmy/hlodac/bin/hlodac',
+            pid = function()
+                local pgrep_cmd = {'pgrep', '^/www/firmy/hlodac/bin/hlodac', '-fn'}
+                local output = vim.fn.system(pgrep_cmd)
+                if output == '\n' then
+                    dap_utils.notifiy('no HLODAC running!', vim.log.levels.INFO)
+                    return
+                end
+                return tonumber(output)
+            end,
+            args = {},
+        },
+        {
+            name = 'attach: TESTER lldb',
+            type = 'codelldb',
+            request = 'attach',
+            program = '/wa/playground/tester_pool',
+            pid = function()
+                local pgrep_cmd = {'pgrep', 'tester_pool'}
+                local output = vim.fn.system(pgrep_cmd)
+                -- if output == '\n' then
+                if output == '' then
+                    dap_utils.notify('no TESTER running!', vim.log.levels.INFO)
+                    return
+                end
+                local my_pid = tonumber(output)
+                dap_utils.notify(string.format('TESTER pid: %s', my_pid), vim.log.levels.INFO)
+
+                return my_pid
+            end,
+            args = {},
+        },
+    }
+end
+
+return M
+DAPCUSTOM
+
+
 
 cat << FINAL_TODOS
 
