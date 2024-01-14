@@ -27,7 +27,7 @@ case "$1" in
         ;;
     *)
         help
-	    ;;
+        ;;
 esac
 
 
@@ -120,7 +120,7 @@ M.dap = {
         ["<leader>db"] = {
             "<cmd> DapToggleBreakpoint <CR>",
             "Add breakpoint at line",
-        },   
+        },
         ["<leader>dr"] = {
             "<cmd> DapContinue <CR>",
             "Start or continue the debugger",
@@ -198,8 +198,15 @@ local plugins = {
         -- marek - workaround - editing lua files
         "nvim-treesitter/nvim-treesitter",
         lazy = false,
-    }
-
+    },
+    {
+        'Bekaboo/dropbar.nvim',
+        event = 'VeryLazy',
+        -- optional, but required for fuzzy finder support
+        dependencies = {
+            'nvim-telescope/telescope-fzf-native.nvim'
+        }
+    },
 }
 
 return plugins
