@@ -76,6 +76,7 @@ vim.opt.whichwrap = nil
 vim.opt.swapfile = false
 vim.opt.expandtab = true
 vim.opt.smartindent = true
+vim.opt.scrolloff = 5
 vim.opt.list = true
 -- overwriten somewhere vim.opt.listchars = "tab:▸\\ ,trail:·"
 -- more 'classic vim-like' vim.opt.laststatus=2
