@@ -14,6 +14,7 @@ set-option -sa terminal-overrides ",xterm*:Tc"
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'christoomey/vim-tmux-navigator'
 # theme
 set -g @plugin 'catppuccin/tmux'
 
@@ -36,6 +37,8 @@ set -g @catppuccin_window_number_position "right"
 set -g @catppuccin_window_default_text "#W"
 set -g @catppuccin_window_current_text "#W"
 
+# set-option -g status-position top
+#
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
 
