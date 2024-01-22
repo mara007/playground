@@ -38,7 +38,12 @@ set -g @catppuccin_window_default_text "#W"
 set -g @catppuccin_window_current_text "#W"
 
 # set-option -g status-position top
-#
+
+# my keybinds
+# bind  c  new-window      -c "#{pane_current_path}"
+# bind  %  split-window -h -c "#{pane_current_path}"
+# bind '"' split-window -v -c "#{pane_current_path}"
+
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
 
