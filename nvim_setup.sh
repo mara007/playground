@@ -78,6 +78,17 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.scrolloff = 5
 vim.opt.list = true
+
+# colors for logs
+vim.cmd('au BufNewFile,BufRead *-dbg_log set ft=b hls')
+# no expandtab for json files - broken
+vim.cmd('au BufRead,BufNewFile re*.txt set ft=json noet hls')
+# *conf files are just ini
+vim.cmd('au BufRead,BufNewFile *.conf set ft=ini hls')
+
+# highliht word under cursor
+vim.cmd([[au CursorMoved * silent! exe printf('match Underlined /\<%s\>/', expand('<cword>'))]])
+
 -- overwriten somewhere vim.opt.listchars = "tab:▸\\ ,trail:·"
 -- more 'classic vim-like' vim.opt.laststatus=2
 
@@ -128,6 +139,7 @@ M.dap = {
         },
         -- moje
         ["<C-p>"] = { "<cmd> Telescope find_files <CR>", "Find files", },
+        ["<A-o>"] = { "<cmd> ClangdSwitchSourceHeader <CR>", "Switch header/source (CLANGD)", },
     }
 }
 
