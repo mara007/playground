@@ -55,6 +55,10 @@ alias bat=batcat
 alias cat=batcat
 alias ls=lsd
 
+#REQUIRES BEAR
+# build macro with generation of build commands for clangd
+alias m='bear -- make -j15 2>&1|lolcat'
+
 EOF
 
 
@@ -65,3 +69,4 @@ nebirhos
 michelebologna
 evan
 EOF
+
