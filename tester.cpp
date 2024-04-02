@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include "stopwatch.h"
 
 struct tester_t {
     tester_t() { std::cout << "tester_t()\n\n"; }
@@ -18,6 +19,8 @@ struct tester_t {
 
 int main (int argc, char * argv [])
 {
+    stopwatch_t sw([](size_t dur) { std::cout << "it took: " << dur << "[us]\n";});
+    stopwatch_t::tp_t2 tp;
     std::cout << "Hello world! of git" << std::endl;
 
     std::cout << "constr\n";

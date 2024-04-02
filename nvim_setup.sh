@@ -57,7 +57,9 @@ read -p '<hit enter to continue>'
 
 echo
 echo CLONE nvChad
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+git clone -b v2.0 https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+# git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+
 
 echo
 echo starting neovim, answer \'N\'o..
