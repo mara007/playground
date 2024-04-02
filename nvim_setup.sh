@@ -80,19 +80,21 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.scrolloff = 5
 vim.opt.list = true
+vim.opt.autoread = false
 
-# colors for logs
+-- colors for logs
 vim.cmd('au BufNewFile,BufRead *-dbg_log set ft=b hls')
-# no expandtab for json files - broken
+-- no expandtab for json files - broken
 vim.cmd('au BufRead,BufNewFile re*.txt set ft=json noet hls')
-# *conf files are just ini
+-- *conf files are just ini
 vim.cmd('au BufRead,BufNewFile *.conf set ft=ini hls')
 
-# highliht word under cursor
+-- highliht word under cursor
 vim.cmd([[au CursorMoved * silent! exe printf('match Underlined /\<%s\>/', expand('<cword>'))]])
 
 -- overwriten somewhere vim.opt.listchars = "tab:▸\\ ,trail:·"
 -- more 'classic vim-like' vim.opt.laststatus=2
+vim.opt.laststatus=2
 
 INITLUA
 

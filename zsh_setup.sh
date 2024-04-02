@@ -49,6 +49,9 @@ bindkey '^[[B' history-substring-search-down
 autoload -Uz compinit
 compinit
 
+# no error when parameter wildcard expansion has no match
+unsetopt nomatch
+
 alias vim=nvim
 alias vi='nvim --clean'
 alias bat=batcat
@@ -64,9 +67,12 @@ EOF
 
 cat << EOF
 Favorite themes:
-kafeitu
-nebirhos
-michelebologna
+eastwood
 evan
+kafeitu
+maran
+michelebologna
+nebirhos
+jnrowe
 EOF
 
