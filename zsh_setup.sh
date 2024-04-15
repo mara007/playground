@@ -67,12 +67,20 @@ EOF
 
 cat << EOF
 Favorite themes:
+================
+lukerandall
+arrow
 eastwood
 evan
+example
+gozilla
+jnrowe
 kafeitu
+kennethreitz
 maran
 michelebologna
 nebirhos
-jnrowe
+sorin  (with git)
+================
 EOF
 
