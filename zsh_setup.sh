@@ -73,13 +73,16 @@ agnoster (with git)
 apple (git)
 arrow
 crunch (with git)
+cypher (no git)
 eastwood
+evan
 evan
 example
 gallifrey (with git)
 gozilla
 jnrowe
 kafeitu
+kennethreitz
 kennethreitz
 lukerandall (git)
 maran
@@ -91,6 +94,7 @@ robbyrussell (with git)
 sonicradish (with git)
 sorin  (with git)
 theunraveler (with git)
+tonotdo
 ================
 EOF
 

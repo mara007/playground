@@ -3,6 +3,7 @@
 #include <vector>
 #include <format>
 #include "stopwatch.h"
+#include <set>
 
 
 struct tester_t {
@@ -50,6 +51,10 @@ void replace_all_of(std::string& where, const std::string& what, const std::stri
     // export TERM=xtermc
 }
 
+std::string tmp_str() {
+    std::string tmp{"kokos"};
+    return tmp;
+}
 
 int main (int argc, char * argv [])
 {
@@ -96,6 +101,26 @@ int main (int argc, char * argv [])
 
 
     std::cout << "Hello world! of git" << std::endl;
+
+
+    {
+        stopwatch_t sw([](size_t dur) { std::cout << "STD SET: it took: " << dur << "[us]\n";});
+        std::set<int> sss;
+        for (int i = 0; i < 1000000; ++i) {
+            sss.insert(i);
+        }
+        std::cout << sss.size();
+    }
+    {
+        stopwatch_t sw([](size_t dur) { std::cout << "BIT OR it took: " << dur << "[us]\n";});
+        int sss = 0;
+        for (int i = 0; i < 1000000; ++i) {
+            sss |= i;
+        }
+        std::cout << sss;
+    }
+    const auto &t = tmp_str();
+    std::cout << "Hello world! of git" << t << std::endl;
 
     std::cout << "constr\n";
     tester_t t1;

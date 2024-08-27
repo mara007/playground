@@ -14,4 +14,7 @@ tester_pool: tester_pool.cpp my_pool.h Makefile
 	$(CC) $(CFLAGS) -o tester_pool tester_pool.cpp -pthread
 
 
+mem_eater: mem_eater.cpp  Makefile
+	$(CC) $(CFLAGS) -o mem_eater mem_eater.cpp -pthread
+
 
