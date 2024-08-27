@@ -1,6 +1,6 @@
 
 CC = g++
-CFLAGS = -g -std=c++2a
+CFLAGS = -g -std=c++20
 
 all: tester tester_utf tester_pool
 

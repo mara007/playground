@@ -68,19 +68,29 @@ EOF
 cat << EOF
 Favorite themes:
 ================
-lukerandall
+af-magic (with git)
+agnoster (with git)
+apple (git)
 arrow
+crunch (with git)
 eastwood
 evan
 example
+gallifrey (with git)
 gozilla
 jnrowe
 kafeitu
 kennethreitz
+lukerandall (git)
 maran
 michelebologna
+minimal
+muse (with git)
 nebirhos
+robbyrussell (with git)
+sonicradish (with git)
 sorin  (with git)
+theunraveler (with git)
 ================
 EOF
 
