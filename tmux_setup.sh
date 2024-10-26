@@ -54,8 +54,8 @@ CONF
 if [ -e ~/.tmux.conf ] ; then
     echo adding original ~/.tmux.conf
     cat ~/.tmux.conf >> ~/.my_tmux_conf
-    mv ~/.my_tmux_conf ~/.tmux.conf
 fi
+mv ~/.my_tmux_conf ~/.tmux.conf
 
 echo run tmux and '<prefix>+I' to install plugins
 
