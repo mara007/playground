@@ -62,10 +62,10 @@ alias ls=lsd
 # build macro with generation of build commands for clangd
 alias m='bear -- make -j15 2>&1|lolcat'
 
-EOF
-
+MY_ZSHRC
 
 cat << EOF
+
 Favorite themes:
 ================
 af-magic (with git)

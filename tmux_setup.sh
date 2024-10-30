@@ -11,6 +11,7 @@ cat > ~/.my_tmux_conf << CONF
 # set colors
 # old, but not eough obviously: set-option -sa terminal-overrides ",xterm*:Tc"
 set -ag terminal-overrides ",*:RGB"
+setw -g mouse on
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
