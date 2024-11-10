@@ -3,7 +3,7 @@
 cat << DEPS
 ################################################################
 # Dependecies:
-# * sudo apt install zsh bat ripgrep lsd nvim
+# * sudo apt install zsh autojump bat ripgrep lsd neovim 
 #  - ..if you don't like those, remove its alias
 #
 # * terminal with nerdfont
@@ -33,7 +33,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 cat << EOF
 update plugins to: these to .zshrc
 
-plugins=(autojump fzf zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting )
+plugins=(autojump git fzf zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting )
 EOF
 
 echo " updating ~/.zshrc .."
