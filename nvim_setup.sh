@@ -122,6 +122,15 @@ M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
 
 return M
+
+--
+map("n", "<C-p>", "<cmd> Telescope find_files <cr>", {desc = "Telescope : Find files .."})
+map("n", "<A-o>", "<cmd> ClangdSwitchSourceHeader <cr>", {desc = "CLANGD : Switch header/source "})
+map("n", "<A-o>", "<cmd> ClangdSwitchSourceHeader <cr>", {desc = "Clangd : Switch header/source "})
+-- map('n', '<leader>gb', "<cmd> Gitsigns toggle_current_line_blame <cr>", {desc = "Gitsigns : toggle current line blame"})
+map('n', '<leader>gb', "<cmd> Gitsigns line_blame <cr>", {desc = "Gitsigns : current line blame"})
+map('n', '<leader>gd', "<cmd> Gitsigns preview_hunk <cr>", {desc = "Gitsigns : preview hunk diff"})
+--
 CHADRC
 
 
@@ -239,7 +248,7 @@ local plugins = {
             { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
             { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
             { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-            { "<c-\\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+            { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
         },
     },
 }
