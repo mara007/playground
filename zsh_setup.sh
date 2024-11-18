@@ -41,6 +41,8 @@ cat >> ~/.zshrc << MY_ZSHRC
 ###########################
 #      MY MY MY           #
 #
+export FZF_DEFAULT_OPTS="--preview 'batcat -r :50 --style=numbers --color=always {}'"
+export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.cache/*' -g '!.minecraft/*' "
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
