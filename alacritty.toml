@@ -1,0 +1,36 @@
+[cursor.style]
+blinking = "Always"
+
+[font]
+size = 9.5
+
+[font.normal]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Medium"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Control|Shift"
+
+# [url.launcher]
+# program = "xdg-open"
+
+[window]
+blur = true
+decorations = "none"
+opacity = 0.86
+
+[window.padding]
+x = 5
+y = 5
