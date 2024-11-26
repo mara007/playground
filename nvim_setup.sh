@@ -126,10 +126,11 @@ return M
 
 --
 map("n", "<C-p>", "<cmd> Telescope find_files <cr>", {desc = "Telescope : Find files .."})
-map("n", "<A-o>", "<cmd> ClangdSwitchSourceHeader <cr>", {desc = "CLANGD : Switch header/source "})
+map("n", "<A-o>", "<cmd> ClangdSwitchSourceHeader <cr>", {desc = "Clangd : Switch header/source "})
 map("n", "<A-o>", "<cmd> ClangdSwitchSourceHeader <cr>", {desc = "Clangd : Switch header/source "})
 -- map('n', '<leader>gb', "<cmd> Gitsigns toggle_current_line_blame <cr>", {desc = "Gitsigns : toggle current line blame"})
 map('n', '<leader>gb', "<cmd> Gitsigns line_blame <cr>", {desc = "Gitsigns : current line blame"})
+map('n', '<leader>gB', "<cmd> Gitsigns blame <cr>", {desc = "Gitsigns : blame whole file"})
 map('n', '<leader>gd', "<cmd> Gitsigns preview_hunk <cr>", {desc = "Gitsigns : preview hunk diff"})
 --
 CHADRC
