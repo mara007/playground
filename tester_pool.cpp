@@ -24,15 +24,15 @@ struct test_t {
     }
 };
 
-#define THREAD_LOOPS 100000
+#define THREAD_LOOPS 1000000
 
 int main() {
     std::cout << "Hello, arbitrary world!\n";
 
     auto p = my_pool_t<test_t>(2, 5);
-    my_pool_t<std::vector<std::string>> my_pool_vector(5, 5);
+    // my_pool_t<std::vector<std::string>> my_pool_vector(5, 5);
 
-    size_t threads_num = 5;
+    size_t threads_num = 20;
     std::vector<std::thread> threads;
     auto thread_func = [&](auto i){
         for (auto j = 0; j < THREAD_LOOPS; ++j) {

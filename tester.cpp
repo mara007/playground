@@ -5,6 +5,10 @@
 #include "stopwatch.h"
 #include <set>
 
+#include <utility>
+#include <vector>
+#include <format>
+#include <memory>
 
 struct tester_t {
     tester_t() { std::cout << "tester_t()\n\n"; }
@@ -99,6 +103,33 @@ int main (int argc, char * argv [])
     std::cout << " pop back: " << s << std::endl;
     return 0;
 
+void def_par(bool b1 = false, bool b2 = false, bool b3 = false) {
+    std::cout << std::format("b1 = {}, b2 = {}, b3 = {}", b1, b2, b3) << std::endl;
+}
+
+struct AA {
+    virtual void print() { std::cout << "AA\n";}
+    virtual void print2() = 0;
+};
+
+struct BB : public AA {
+    virtual void print() { std::cout << "BB\n";}
+
+};
+int main (int argc, char * argv [])
+{
+    std::shared_ptr<AA> aa = std::make_shared<BB>();
+    aa->print();
+    return 0;
+
+    bool b = false;
+    def_par(b=true);
+    def_par(b);
+    std::vector<int> ve;
+    std::cout << "ve : " << ve.front() << std::endl;
+    for (int i = 0; i <= 10; ++i-=-1) {
+        std::cout << "I = " << i << std::endl;
+    }
 
     std::cout << "Hello world! of git" << std::endl;
 
