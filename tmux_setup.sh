@@ -9,9 +9,8 @@ echo setup tmux conf
 
 cat > ~/.my_tmux_conf << CONF
 # set colors
-# old, but not eough obviously: set-option -sa terminal-overrides ",xterm*:Tc"
+# set-option -sa terminal-overrides ",xterm*:Tc"
 set -ag terminal-overrides ",*:RGB"
-setw -g mouse on
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
@@ -22,33 +21,40 @@ set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'catppuccin/tmux'
 
 
-# Other examples:
-# set -g @plugin 'github_username/plugin_name'
-# set -g @plugin 'github_username/plugin_name#branch'
-# set -g @plugin 'git@github.com:user/plugin'
-# set -g @plugin 'git@bitbucket.com:user/plugin'
+set -g mouse on
+set -g display-panes-time 2500
+set-environment -g 'SSH_AUTH_SOCK' ~/.ssh/ssh_auth_sock
+
+set -g allow-rename off
+set-window-option -g allow-rename off
+set -wg automatic-rename off
 
 set -g @catppuccin_window_status_enable "yes"
 set -g @catppuccin_window_status_icon_enable "yes"
+set -g @catppuccin_window_status_style "slanted"
 
-set -g @catppuccin_window_status_enable "yes"
-set -g @catppuccin_window_status_icon_enable "yes"
-set -g @catppuccin_window_left_separator ""
-set -g @catppuccin_window_right_separator " "
-set -g @catppuccin_window_middle_separator " █"
-set -g @catppuccin_window_number_position "right"
-set -g @catppuccin_window_default_text "#W"
-set -g @catppuccin_window_current_text "#W"
+set -ggq @catppuccin_window_text "#W"
+set -ggq @catppuccin_window_current_text "#W"
 
-# set-option -g status-position top
 
-# my keybinds
-# bind  c  new-window      -c "#{pane_current_path}"
-# bind  %  split-window -h -c "#{pane_current_path}"
-# bind '"' split-window -v -c "#{pane_current_path}"
+# Make the status line pretty and add some modules
+set -g status-right-length 100
+set -g status-left-length 100
+set -g status-left ""
+set -g status-right "#{E:@catppuccin_status_application}"
+set -agF status-right "#{E:@catppuccin_status_cpu}"
+set -ag status-right "#{E:@catppuccin_status_session}"
+set -ag status-right "#{E:@catppuccin_status_uptime}"
+
+# my binds
+bind  c  new-window      -c "#{pane_current_path}"
+bind  %  split-window -h -c "#{pane_current_path}"
+bind '"' split-window -v -c "#{pane_current_path}"
+
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
+
 
 CONF
 
